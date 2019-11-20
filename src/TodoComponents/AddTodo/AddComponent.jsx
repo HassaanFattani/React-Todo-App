@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import GetComponent from "../GetComponent";
+import GetComponent from "../GetTodo";
 
 class AddComponent extends Component {
   constructor(props) {
@@ -27,6 +27,14 @@ class AddComponent extends Component {
     });
   };
 
+  editToDoFromState = (index, newText) => {
+    let todo = this.state.todoArray;
+    todo.splice(index, 1, newText);
+    this.setState({
+      todoArray: todo
+    });
+  };
+
   render() {
     return (
       <div>
@@ -47,6 +55,7 @@ class AddComponent extends Component {
           <GetComponent
             todolist={this.state.todoArray}
             removeItem={this.removeArrayItem}
+            editToDoFromState={this.editToDoFromState}
           />
         </div>
       </div>
