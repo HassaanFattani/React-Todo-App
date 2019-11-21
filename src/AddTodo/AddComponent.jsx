@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import GetComponent from "./GetComponent";
+import GetComponent from "../GetComponent";
 
 class AddComponent extends Component {
   constructor(props) {
@@ -19,6 +19,14 @@ class AddComponent extends Component {
     });
   }
 
+  removeArrayItem = index => {
+    let todo = this.state.todoArray;
+    todo.splice(index, 1);
+    this.setState({
+      todoArray: todo
+    });
+  };
+
   render() {
     return (
       <div>
@@ -26,14 +34,20 @@ class AddComponent extends Component {
           <input
             type="text"
             placeholder="Type Something...."
-            onChange={e => this.handleChange(e.target.value)}
+            value={this.state.stringText}
+            onChange={e => {
+              this.handleChange(e.target.value);
+            }}
           />
         </p>
         <p>
           <button onClick={() => this.addTodo()}>Add</button>
         </p>
         <div>
-          <GetComponent todolist={this.state.todoArray} />
+          <GetComponent
+            todolist={this.state.todoArray}
+            removeItem={this.removeArrayItem}
+          />
         </div>
       </div>
     );

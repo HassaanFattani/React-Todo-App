@@ -5,7 +5,10 @@ class GetComponent extends Component {
     super(props);
   }
 
-  delete(index) {}
+  delete = index => {
+    this.props.removeItem(index);
+  };
+
   render() {
     return (
       <div>
@@ -13,7 +16,7 @@ class GetComponent extends Component {
           return (
             <h1 key={index}>
               {data}
-              <button onClick={this.delete(index)}>Delete</button>
+              <button onClick={() => this.delete(index)}>Delete</button>
             </h1>
           );
         })}

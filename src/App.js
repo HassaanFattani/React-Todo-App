@@ -1,7 +1,7 @@
 import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import AddComponent from "./AddComponent";
+import AddComponent from "./AddTodo";
 
 function App() {
   return (
