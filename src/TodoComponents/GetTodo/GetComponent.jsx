@@ -2,27 +2,6 @@ import React, { Component, Fragment } from "react";
 import { Button, Input, Form, Table, Popconfirm } from "antd";
 import DeleteTodo from "../../Network/DeleteData";
 
-const columns = [
-  { title: "ID", dataIndex: "id", key: "id" },
-  { title: "Title", dataIndex: "title", key: "title" },
-  { title: "Completed", dataIndex: "completed", key: "completed" },
-  {
-    title: "DELETE",
-    key: "action",
-    render: (text, record) => (
-      <Popconfirm
-        title="Sure to delete?"
-        onConfirm={() => {
-          console.log("iddd", text.id);
-          DeleteTodo(text.id);
-        }}
-      >
-        <a href="javascript:;">Delete</a>
-      </Popconfirm>
-    )
-  }
-];
-
 class GetComponent extends Component {
   constructor(props) {
     super(props);
@@ -30,8 +9,43 @@ class GetComponent extends Component {
       isEditing: false,
       index: 0
     };
+    this.columns = [
+      { title: "ID", dataIndex: "id", key: "id" },
+      { title: "Title", dataIndex: "title", key: "title" },
+      { title: "Completed", dataIndex: "completed", key: "completed" },
+      {
+        title: "DELETE",
+        key: "delete",
+        render: (text, record) => (
+          <Popconfirm
+            title="Sure to delete?"
+            onConfirm={() => {
+              DeleteTodo(text.id);
+            }}
+          >
+            <a href="#">Delete</a>
+          </Popconfirm>
+        )
+      },
+      {
+        title: "Edit",
+        key: "edit",
+        render: (text, record) => (
+          <a
+            onClick={() => {
+              this.EditToDo(text.id);
+            }}
+          >
+            Edit
+          </a>
+        )
+      }
+    ];
   }
 
+  EditToDo = id => {
+    this.props.propers.history.push("/MainPage/" + id);
+  };
   // toggleEditing = index => {
   //   this.setState({
   //     isEditing: !this.state.isEditing,
@@ -57,6 +71,7 @@ class GetComponent extends Component {
     //   width: "20%",
     //   margin: "0 auto"
     // };
+    console.log("Render", this.props);
     return (
       <div>
         {/* {this.props.todolist.map((data, index) => {
@@ -98,7 +113,11 @@ class GetComponent extends Component {
             );
           }
         })} */}
-        <Table columns={columns} dataSource={this.props.todolist} rowKey="id" />
+        <Table
+          columns={this.columns}
+          dataSource={this.props.todolist}
+          rowKey="id"
+        />
       </div>
     );
   }

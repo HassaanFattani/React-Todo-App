@@ -90,6 +90,7 @@ class AddComponent extends Component {
         </Form>
         <GetComponent
           todolist={this.state.todoArray}
+          propers={this.props}
           // removeItem={this.removeArrayItem}
           // editToDoFromState={this.editToDoFromState}
         />

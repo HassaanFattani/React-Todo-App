@@ -1,12 +1,11 @@
 import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
-import AddComponent from "./TodoComponents/AddTodo";
+import Routes from "./Routes";
 
 function App() {
   return (
     <div className="App">
-      <AddComponent />
+      <Routes />
     </div>
   );
 }
